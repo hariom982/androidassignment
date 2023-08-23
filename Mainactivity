@@ -1,0 +1,78 @@
+package com.example.assignmentapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    String [] str = {"Available | Hey Let Us Connect","Away | Stay Discrete And Watch","Busy | Do Not Disturb | Will Catch Up Later","SOS | Emergency! Need Assistance! HELP"};
+
+    TextView about;
+    EditText status;
+    SeekBar seekBar;
+    ImageView explore;
+    Button friendship,coffee,hobbies,business,movies,dating,travel;
+    @SuppressLint("MissingInflatedId")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        about = findViewById(R.id.about);
+        status = findViewById(R.id.status);
+        seekBar = findViewById(R.id.seekBar);
+        explore = findViewById(R.id.exploreimage);
+        friendship = findViewById(R.id.friendship);
+        hobbies = findViewById(R.id.hobbies);
+        travel = findViewById(R.id.travel);
+        dating = findViewById(R.id.dating);
+        travel = findViewById(R.id.travel);
+        movies = findViewById(R.id.movies);
+        coffee = findViewById(R.id.coffee);
+        business = findViewById(R.id.business);
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCreateDialog(savedInstanceState);
+
+            }
+        });
+        explore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,exploreact.class);
+                startActivity(intent);
+            }
+        });
+    }
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this);
+        builder.setItems(str, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if("Available | Hey Let Us Connect".equals(str[which])){
+                    about.setText("Availble | Hey Let Us Connect");
+                }if("Away | Stay Discrete And Watch".equals(str[which])){
+                    about.setText("Away | Stay Discrete And Watch");
+                }if("Busy | Do Not Disturb | Will Catch Up Later".equals(str[which])){
+                    about.setText("Busy | Do Not Disturb | Will Catch Up Later");
+                }if("SOS | Emergency! Need Assistance! HELP".equals(str[which])){
+                    about.setText("SOS | Emergency! Need Assistance! HELP");
+                }
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        return builder.create();
+    }
+
+}
